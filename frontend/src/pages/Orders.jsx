@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Card, Alert, Spinner, Pagination } from 'react-bootstrap';
 import { orderService } from '../services/api';
 
 import OrderTable from '../components/orders/OrderTable';
@@ -72,53 +71,68 @@ export default function Orders() {
     };
 
     return (
-        <Container fluid className="py-4">
-            <div className="d-flex justify-content-between align-items-center mb-4">
-                <h2 className="text-secondary fw-bold mb-0">Order Management</h2>
+        <div className="w-full px-4 py-8 max-w-7xl mx-auto">
+            <div className="flex justify-between items-center mb-6">
+                <h2 className="text-2xl font-bold text-slate-800 m-0">Order Management</h2>
             </div>
 
-            {successMsg && <Alert variant="success">{successMsg}</Alert>}
-            {error && <Alert variant="danger">{error}</Alert>}
+            {successMsg && (
+                <div className="mb-6 p-4 rounded-xl bg-emerald-50 border border-emerald-100 text-emerald-800 text-sm font-medium">
+                    {successMsg}
+                </div>
+            )}
+            
+            {error && (
+                <div className="mb-6 p-4 rounded-xl bg-red-50 border border-red-100 text-red-800 text-sm font-medium">
+                    {error}
+                </div>
+            )}
 
-            <Card className="shadow-sm border-0 mb-4">
-                <Card.Body>
-                    <OrderFilters 
-                        filters={filters} 
-                        setFilters={setFilters} 
-                        onSearch={handleSearch} 
-                    />
+            <div className="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-6 mb-6">
+                <OrderFilters 
+                    filters={filters} 
+                    setFilters={setFilters} 
+                    onSearch={handleSearch} 
+                />
 
-                    {loading ? (
-                        <div className="text-center py-5">
-                            <Spinner animation="border" variant="primary" />
-                        </div>
-                    ) : (
-                        <>
-                            <OrderTable 
-                                orders={orders} 
-                                onViewDetails={handleViewDetails} 
-                            />
-                            
-                            {/* Pagination */}
-                            {pagination.last_page > 1 && (
-                                <div className="d-flex justify-content-end mt-3">
-                                    <Pagination>
-                                        <Pagination.Prev 
-                                            disabled={pagination.current_page === 1}
-                                            onClick={() => setCurrentPage(prev => prev - 1)} 
-                                        />
-                                        <Pagination.Item active>{pagination.current_page}</Pagination.Item>
-                                        <Pagination.Next 
-                                            disabled={pagination.current_page === pagination.last_page}
-                                            onClick={() => setCurrentPage(prev => prev + 1)}
-                                        />
-                                    </Pagination>
-                                </div>
-                            )}
-                        </>
-                    )}
-                </Card.Body>
-            </Card>
+                {loading ? (
+                    <div className="text-center py-12">
+                        <div className="inline-block animate-spin rounded-full h-8 w-8 border-4 border-solid border-violet-600 border-r-transparent align-[-0.125em]"></div>
+                    </div>
+                ) : (
+                    <>
+                        <OrderTable 
+                            orders={orders} 
+                            onViewDetails={handleViewDetails} 
+                        />
+                        
+                        {/* Pagination */}
+                        {pagination.last_page > 1 && (
+                            <div className="flex justify-end mt-6">
+                                <nav className="flex items-center gap-1">
+                                    <button 
+                                        disabled={pagination.current_page === 1}
+                                        onClick={() => setCurrentPage(prev => prev - 1)}
+                                        className="px-3 py-1.5 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-bold transition-colors"
+                                    >
+                                        Prev
+                                    </button>
+                                    <button className="px-3 py-1.5 rounded-xl bg-violet-600 text-white text-sm font-bold shadow-md">
+                                        {pagination.current_page}
+                                    </button>
+                                    <button 
+                                        disabled={pagination.current_page === pagination.last_page}
+                                        onClick={() => setCurrentPage(prev => prev + 1)}
+                                        className="px-3 py-1.5 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-bold transition-colors"
+                                    >
+                                        Next
+                                    </button>
+                                </nav>
+                            </div>
+                        )}
+                    </>
+                )}
+            </div>
 
             {/* Modals */}
             <OrderDetails 
@@ -127,6 +141,6 @@ export default function Orders() {
                 orderId={selectedOrderId}
                 onUpdateSuccess={onUpdateSuccess}
             />
-        </Container>
+        </div>
     );
 }

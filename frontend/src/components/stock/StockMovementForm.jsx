@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Button, Form, Alert } from 'react-bootstrap';
 import { stockService, productService } from '../../services/api';
 
 export default function StockMovementForm({ show, handleClose, onSaveSuccess }) {
@@ -80,7 +79,6 @@ export default function StockMovementForm({ show, handleClose, onSaveSuccess }) 
             handleClose();
         } catch (err) {
             if (err.response && err.response.status === 422) {
-                // Laravel validation errors use 'errors' object, custom exceptions use 'error' string
                 if (err.response.data.error) {
                     setError(err.response.data.error);
                 } else {
@@ -97,90 +95,115 @@ export default function StockMovementForm({ show, handleClose, onSaveSuccess }) 
         }
     };
 
+    if (!show) return null;
+
     return (
-        <Modal show={show} onHide={handleClose} centered backdrop="static">
-            <Modal.Header closeButton>
-                <Modal.Title>Add Stock Movement</Modal.Title>
-            </Modal.Header>
-            <Form onSubmit={handleSubmit}>
-                <Modal.Body>
-                    {error && <Alert variant="danger">{error}</Alert>}
-                    
-                    <Form.Group className="mb-3" controlId="stockProd">
-                        <Form.Label>Product <span className="text-danger">*</span></Form.Label>
-                        <Form.Select 
-                            name="product_id"
-                            value={formData.product_id}
-                            onChange={handleChange}
-                            required
-                            isInvalid={!!validationErrors.product_id}
-                            disabled={loadingProducts}
-                        >
-                            <option value="">{loadingProducts ? 'Loading...' : 'Select Product'}</option>
-                            {products.map(p => (
-                                <option key={p.id} value={p.id}>{p.name} (Stock: {p.stock_quantity})</option>
-                            ))}
-                        </Form.Select>
-                        <Form.Control.Feedback type="invalid">{validationErrors.product_id}</Form.Control.Feedback>
-                    </Form.Group>
-
-                    <div className="row mb-3">
-                        <Form.Group as="div" className="col-md-6" controlId="stockType">
-                            <Form.Label>Movement Type <span className="text-danger">*</span></Form.Label>
-                            <Form.Select 
-                                name="type"
-                                value={formData.type}
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4">
+            <div className="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+                <div className="p-6 border-b border-slate-100 flex justify-between items-center">
+                    <h2 className="text-xl font-bold text-slate-800">Add Stock Movement</h2>
+                    <button onClick={handleClose} className="text-slate-400 hover:text-slate-600 transition-colors text-2xl leading-none">&times;</button>
+                </div>
+                <form onSubmit={handleSubmit}>
+                    <div className="p-6 space-y-4">
+                        {error && <div className="bg-red-100 text-red-800 p-4 rounded-xl font-medium text-sm">{error}</div>}
+                        
+                        <div>
+                            <label className="block text-sm font-bold text-slate-700 mb-2" htmlFor="product_id">
+                                Product <span className="text-red-500">*</span>
+                            </label>
+                            <select 
+                                id="product_id"
+                                name="product_id"
+                                value={formData.product_id}
                                 onChange={handleChange}
                                 required
-                                isInvalid={!!validationErrors.type}
+                                disabled={loadingProducts}
+                                className={`w-full px-4 py-3 rounded-xl border bg-white focus:ring-2 focus:ring-violet-500/20 focus:border-violet-500 outline-none text-slate-700 text-sm font-medium transition-all ${validationErrors.product_id ? 'border-red-500' : 'border-slate-200'}`}
                             >
-                                <option value="in">IN (Add Stock)</option>
-                                <option value="out">OUT (Remove Stock)</option>
-                                <option value="adjustment">ADJUSTMENT (Audit/Correct)</option>
-                            </Form.Select>
-                            <Form.Control.Feedback type="invalid">{validationErrors.type}</Form.Control.Feedback>
-                        </Form.Group>
+                                <option value="">{loadingProducts ? 'Loading...' : 'Select Product'}</option>
+                                {products.map(p => (
+                                    <option key={p.id} value={p.id}>{p.name} (Stock: {p.stock_quantity})</option>
+                                ))}
+                            </select>
+                            {validationErrors.product_id && <p className="text-red-500 text-xs font-semibold mt-1">{validationErrors.product_id}</p>}
+                        </div>
 
-                        <Form.Group as="div" className="col-md-6" controlId="stockQty">
-                            <Form.Label>Quantity <span className="text-danger">*</span></Form.Label>
-                            <Form.Control
-                                type="number"
-                                min="0.01"
-                                step="any"
-                                name="quantity"
-                                value={formData.quantity}
+                        <div className="grid grid-cols-2 gap-4">
+                            <div>
+                                <label className="block text-sm font-bold text-slate-700 mb-2" htmlFor="type">
+                                    Movement Type <span className="text-red-500">*</span>
+                                </label>
+                                <select 
+                                    id="type"
+                                    name="type"
+                                    value={formData.type}
+                                    onChange={handleChange}
+                                    required
+                                    className={`w-full px-4 py-3 rounded-xl border bg-white focus:ring-2 focus:ring-violet-500/20 focus:border-violet-500 outline-none text-slate-700 text-sm font-medium transition-all ${validationErrors.type ? 'border-red-500' : 'border-slate-200'}`}
+                                >
+                                    <option value="in">IN (Add Stock)</option>
+                                    <option value="out">OUT (Remove Stock)</option>
+                                    <option value="adjustment">ADJUSTMENT (Audit/Correct)</option>
+                                </select>
+                                {validationErrors.type && <p className="text-red-500 text-xs font-semibold mt-1">{validationErrors.type}</p>}
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-bold text-slate-700 mb-2" htmlFor="quantity">
+                                    Quantity <span className="text-red-500">*</span>
+                                </label>
+                                <input
+                                    id="quantity"
+                                    type="number"
+                                    min="0.01"
+                                    step="any"
+                                    name="quantity"
+                                    value={formData.quantity}
+                                    onChange={handleChange}
+                                    required
+                                    className={`w-full px-4 py-3 rounded-xl border bg-white focus:ring-2 focus:ring-violet-500/20 focus:border-violet-500 outline-none text-slate-700 text-sm font-medium transition-all ${validationErrors.quantity ? 'border-red-500' : 'border-slate-200'}`}
+                                />
+                                {validationErrors.quantity && <p className="text-red-500 text-xs font-semibold mt-1">{validationErrors.quantity}</p>}
+                            </div>
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-bold text-slate-700 mb-2" htmlFor="reason">
+                                Reason
+                            </label>
+                            <textarea
+                                id="reason"
+                                rows={2}
+                                name="reason"
+                                placeholder="Optional reason for the movement (e.g. Received new shipment)"
+                                value={formData.reason}
                                 onChange={handleChange}
-                                required
-                                isInvalid={!!validationErrors.quantity}
+                                className={`w-full px-4 py-3 rounded-xl border bg-white focus:ring-2 focus:ring-violet-500/20 focus:border-violet-500 outline-none text-slate-700 text-sm font-medium transition-all ${validationErrors.reason ? 'border-red-500' : 'border-slate-200'}`}
                             />
-                            <Form.Control.Feedback type="invalid">{validationErrors.quantity}</Form.Control.Feedback>
-                        </Form.Group>
+                            {validationErrors.reason && <p className="text-red-500 text-xs font-semibold mt-1">{validationErrors.reason}</p>}
+                        </div>
+
                     </div>
-
-                    <Form.Group className="mb-3" controlId="stockReason">
-                        <Form.Label>Reason</Form.Label>
-                        <Form.Control
-                            as="textarea"
-                            rows={2}
-                            name="reason"
-                            placeholder="Optional reason for the movement (e.g. Received new shipment)"
-                            value={formData.reason}
-                            onChange={handleChange}
-                            isInvalid={!!validationErrors.reason}
-                        />
-                        <Form.Control.Feedback type="invalid">{validationErrors.reason}</Form.Control.Feedback>
-                    </Form.Group>
-
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose} disabled={loading}>
-                        Cancel
-                    </Button>
-                    <Button variant="primary" type="submit" disabled={loading || !formData.product_id || !formData.quantity}>
-                        {loading ? 'Processing...' : 'Record Movement'}
-                    </Button>
-                </Modal.Footer>
-            </Form>
-        </Modal>
+                    <div className="p-6 border-t border-slate-100 flex justify-end gap-3 bg-slate-50/50">
+                        <button 
+                            type="button" 
+                            onClick={handleClose} 
+                            disabled={loading}
+                            className="bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 font-bold py-2 px-4 rounded-xl shadow-sm transition-all"
+                        >
+                            Cancel
+                        </button>
+                        <button 
+                            type="submit" 
+                            disabled={loading || !formData.product_id || !formData.quantity}
+                            className="bg-violet-600 hover:bg-violet-700 text-white font-bold py-2 px-4 rounded-xl shadow-md transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                            {loading ? 'Processing...' : 'Record Movement'}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     );
 }

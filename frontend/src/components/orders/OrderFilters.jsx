@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button } from 'react-bootstrap';
 import { customerService } from '../../services/api';
 
 export default function OrderFilters({ filters, setFilters, onSearch }) {
@@ -22,49 +21,54 @@ export default function OrderFilters({ filters, setFilters, onSearch }) {
     };
 
     return (
-        <Form onSubmit={handleSubmit} className="d-flex flex-wrap gap-2 mb-3">
-            <Form.Control
+        <form onSubmit={handleSubmit} className="flex flex-wrap items-center gap-3 mb-6">
+            <input
                 type="text"
                 name="search"
                 placeholder="Search Order ID..."
                 value={filters.search || ''}
                 onChange={handleChange}
-                style={{ maxWidth: '150px' }}
+                className="w-full sm:w-auto px-4 py-2.5 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-violet-500/20 focus:border-violet-500 outline-none text-slate-700 text-sm font-medium transition-all max-w-[150px]"
             />
 
-            <Form.Select 
+            <select 
                 name="customer_id" 
                 value={filters.customer_id || ''} 
                 onChange={handleChange}
-                style={{ maxWidth: '200px' }}
+                className="w-full sm:w-auto px-4 py-2.5 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-violet-500/20 focus:border-violet-500 outline-none text-slate-700 text-sm font-medium transition-all max-w-[200px]"
             >
                 <option value="">All Customers</option>
                 {customers.map(c => (
                     <option key={c.id} value={c.id}>{c.name}</option>
                 ))}
-            </Form.Select>
+            </select>
             
-            <Form.Select 
+            <select 
                 name="status" 
                 value={filters.status || ''} 
                 onChange={handleChange}
-                style={{ maxWidth: '180px' }}
+                className="w-full sm:w-auto px-4 py-2.5 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-violet-500/20 focus:border-violet-500 outline-none text-slate-700 text-sm font-medium transition-all max-w-[180px]"
             >
                 <option value="">All Statuses</option>
                 <option value="pending">Pending</option>
                 <option value="completed">Completed</option>
                 <option value="cancelled">Cancelled</option>
-            </Form.Select>
+            </select>
 
-            <Form.Control
+            <input
                 type="date"
                 name="date"
                 value={filters.date || ''}
                 onChange={handleChange}
-                style={{ maxWidth: '160px' }}
+                className="w-full sm:w-auto px-4 py-2.5 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-violet-500/20 focus:border-violet-500 outline-none text-slate-700 text-sm font-medium transition-all max-w-[160px]"
             />
 
-            <Button variant="outline-secondary" type="submit">Filter</Button>
-        </Form>
+            <button 
+                type="submit"
+                className="w-full sm:w-auto bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 font-bold py-2.5 px-5 rounded-xl shadow-sm transition-all text-sm"
+            >
+                Filter
+            </button>
+        </form>
     );
 }

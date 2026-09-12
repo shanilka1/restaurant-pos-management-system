@@ -9,6 +9,21 @@ export const AuthProvider = ({ children }) => {
     const [role, setRole] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    const logout = async () => {
+        try {
+            if (token) {
+                await authService.logout();
+            }
+        } catch (error) {
+            console.error('Logout error:', error);
+        } finally {
+            localStorage.removeItem('token');
+            setToken(null);
+            setUser(null);
+            setRole(null);
+        }
+    };
+
     useEffect(() => {
         if (token) {
             authService.getUser()
@@ -35,23 +50,18 @@ export const AuthProvider = ({ children }) => {
         setRole(userData.role);
     };
 
-    const logout = async () => {
-        try {
-            if (token) {
-                await authService.logout();
-            }
-        } catch (error) {
-            console.error('Logout error:', error);
-        } finally {
-            localStorage.removeItem('token');
-            setToken(null);
-            setUser(null);
-            setRole(null);
-        }
+    const register = async (data) => {
+        const response = await authService.register(data);
+        const { user: userData, access_token } = response.data.data;
+        
+        localStorage.setItem('token', access_token);
+        setToken(access_token);
+        setUser(userData);
+        setRole(userData.role);
     };
 
     return (
-        <AuthContext.Provider value={{ user, token, role, login, logout, loading }}>
+        <AuthContext.Provider value={{ user, token, role, login, register, logout, loading }}>
             {children}
         </AuthContext.Provider>
     );

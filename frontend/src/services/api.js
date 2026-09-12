@@ -1,10 +1,12 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL,
+    baseURL: 'https://minipos-backend-123.loca.lt/api',
     headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'Bypass-Tunnel-Reminder': 'true',
+        'ngrok-skip-browser-warning': 'true'
     },
     // Required for Sanctum CSRF protection if SPA and API are on same domain,
     // but since we're using tokens directly, withCredentials isn't strictly necessary for token-based,
@@ -39,6 +41,7 @@ api.interceptors.response.use(
 
 // Services exports
 export const authService = {
+    register: (data) => api.post('/register', data),
     login: (credentials) => api.post('/login', credentials),
     logout: () => api.post('/logout'),
     getUser: () => api.get('/user'),

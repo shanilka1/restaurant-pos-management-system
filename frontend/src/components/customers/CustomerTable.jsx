@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { Table, Button } from 'react-bootstrap';
 import { AuthContext } from '../../context/AuthContext';
 
 export default function CustomerTable({ customers, onEdit, onDelete }) {
@@ -8,56 +7,55 @@ export default function CustomerTable({ customers, onEdit, onDelete }) {
 
     if (!customers || customers.length === 0) {
         return (
-            <div className="text-center p-4 bg-white border rounded">
-                <p className="text-muted mb-0">No customers found.</p>
+            <div className="text-center p-6 bg-slate-50 border border-slate-100 rounded-xl">
+                <p className="text-slate-500 font-medium mb-0">No customers found.</p>
             </div>
         );
     }
 
     return (
-        <Table responsive hover className="bg-white border mb-0">
-            <thead className="table-light">
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th>Email</th>
-                    <th>Address</th>
-                    <th>Created At</th>
-                    <th className="text-end">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {customers.map((customer) => (
-                    <tr key={customer.id}>
-                        <td className="align-middle">{customer.id}</td>
-                        <td className="align-middle fw-bold">{customer.name}</td>
-                        <td className="align-middle">{customer.phone}</td>
-                        <td className="align-middle">{customer.email || '-'}</td>
-                        <td className="align-middle">{customer.address || '-'}</td>
-                        <td className="align-middle">{new Date(customer.created_at).toLocaleDateString()}</td>
-                        <td className="align-middle text-end">
-                            <Button 
-                                variant="outline-primary" 
-                                size="sm" 
-                                className="me-2"
-                                onClick={() => onEdit(customer)}
-                            >
-                                Edit
-                            </Button>
-                            {isAdmin && (
-                                <Button 
-                                    variant="outline-danger" 
-                                    size="sm"
-                                    onClick={() => onDelete(customer)}
-                                >
-                                    Delete
-                                </Button>
-                            )}
-                        </td>
+        <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+                <thead>
+                    <tr>
+                        <th className="pb-3 text-xs font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100">ID</th>
+                        <th className="pb-3 text-xs font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100">Name</th>
+                        <th className="pb-3 text-xs font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100">Phone</th>
+                        <th className="pb-3 text-xs font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100">Email</th>
+                        <th className="pb-3 text-xs font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100">Address</th>
+                        <th className="pb-3 text-xs font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100">Created At</th>
+                        <th className="pb-3 text-xs font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100 text-right">Actions</th>
                     </tr>
-                ))}
-            </tbody>
-        </Table>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                    {customers.map((customer) => (
+                        <tr key={customer.id} className="hover:bg-slate-50/50">
+                            <td className="py-4 text-sm font-semibold text-slate-700">{customer.id}</td>
+                            <td className="py-4 text-sm font-bold text-slate-900">{customer.name}</td>
+                            <td className="py-4 text-sm font-semibold text-slate-700">{customer.phone}</td>
+                            <td className="py-4 text-sm font-semibold text-slate-700">{customer.email || '-'}</td>
+                            <td className="py-4 text-sm font-semibold text-slate-700">{customer.address || '-'}</td>
+                            <td className="py-4 text-sm font-semibold text-slate-700">{new Date(customer.created_at).toLocaleDateString()}</td>
+                            <td className="py-4 text-sm font-semibold text-right space-x-2">
+                                <button 
+                                    className="bg-white border border-slate-200 text-violet-600 hover:bg-violet-50 font-bold py-1.5 px-3 rounded-lg shadow-sm transition-all text-xs"
+                                    onClick={() => onEdit(customer)}
+                                >
+                                    Edit
+                                </button>
+                                {isAdmin && (
+                                    <button 
+                                        className="bg-white border border-red-200 text-red-600 hover:bg-red-50 font-bold py-1.5 px-3 rounded-lg shadow-sm transition-all text-xs"
+                                        onClick={() => onDelete(customer)}
+                                    >
+                                        Delete
+                                    </button>
+                                )}
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
     );
 }

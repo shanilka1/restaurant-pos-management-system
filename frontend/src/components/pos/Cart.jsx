@@ -1,5 +1,4 @@
 import React from 'react';
-import { Card, Button, Alert } from 'react-bootstrap';
 import CartItem from './CartItem';
 import CustomerSelector from './CustomerSelector';
 
@@ -17,71 +16,82 @@ export default function Cart({
     error 
 }) {
     return (
-        <Card className="shadow-sm h-100 d-flex flex-column border-0">
-            <Card.Header className="bg-white py-3">
-                <div className="d-flex justify-content-between align-items-center">
-                    <h5 className="mb-0 fw-bold text-secondary">Current Order</h5>
+        <div className="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 h-full flex flex-col overflow-hidden">
+            <div className="bg-white p-4 border-b border-slate-100">
+                <div className="flex justify-between items-center">
+                    <h5 className="mb-0 text-lg font-bold text-slate-800">Current Order</h5>
                     {cart.length > 0 && (
-                        <Button variant="outline-danger" size="sm" onClick={clearCart} disabled={isSubmitting}>
+                        <button 
+                            className="bg-white border border-red-200 text-red-600 hover:bg-red-50 hover:border-red-300 font-bold py-1.5 px-3 rounded-xl shadow-sm transition-all text-sm disabled:opacity-50"
+                            onClick={clearCart} 
+                            disabled={isSubmitting}
+                        >
                             Clear Cart
-                        </Button>
+                        </button>
                     )}
                 </div>
-            </Card.Header>
+            </div>
             
-            <Card.Body className="d-flex flex-column p-0 flex-grow-1 overflow-hidden">
-                <div className="p-3 flex-grow-1 overflow-auto bg-light">
+            <div className="flex flex-col p-0 flex-grow overflow-hidden bg-slate-50/50">
+                <div className="p-4 flex-grow overflow-auto">
                     {cart.length === 0 ? (
-                        <div className="text-center text-muted my-5">
-                            <p>Cart is empty.</p>
-                            <small>Select products from the grid to add them to the order.</small>
+                        <div className="text-center text-slate-500 my-10">
+                            <p className="font-medium">Cart is empty.</p>
+                            <small className="text-slate-400">Select products from the grid to add them to the order.</small>
                         </div>
                     ) : (
-                        cart.map(item => (
-                            <CartItem 
-                                key={item.product_id}
-                                item={item}
-                                updateQuantity={updateQuantity}
-                                onRemove={removeFromCart}
-                            />
-                        ))
+                        <div className="space-y-3">
+                            {cart.map(item => (
+                                <CartItem 
+                                    key={item.product_id}
+                                    item={item}
+                                    updateQuantity={updateQuantity}
+                                    onRemove={removeFromCart}
+                                />
+                            ))}
+                        </div>
                     )}
                 </div>
 
-                <div className="p-3 bg-white border-top">
-                    <CustomerSelector 
-                        selectedCustomerId={selectedCustomerId} 
-                        onSelectCustomer={setSelectedCustomerId} 
-                    />
+                <div className="p-4 bg-white border-t border-slate-100">
+                    <div className="mb-4">
+                        <CustomerSelector 
+                            selectedCustomerId={selectedCustomerId} 
+                            onSelectCustomer={setSelectedCustomerId} 
+                        />
+                    </div>
                     
-                    {error && <Alert variant="danger" className="py-2">{error}</Alert>}
+                    {error && (
+                        <div className="bg-red-100 text-red-800 p-3 rounded-xl mb-4 text-sm font-medium">
+                            {error}
+                        </div>
+                    )}
 
-                    <div className="d-flex justify-content-between mb-2">
-                        <span className="text-muted">Total Items:</span>
-                        <span className="fw-bold">{cartTotalItems}</span>
+                    <div className="flex justify-between items-center mb-2">
+                        <span className="text-slate-500 font-medium">Total Items:</span>
+                        <span className="font-bold text-slate-700">{cartTotalItems}</span>
                     </div>
-                    <div className="d-flex justify-content-between mb-4">
-                        <span className="fs-5 fw-bold">Total (Est):</span>
-                        <span className="fs-5 fw-bold text-success">${cartTotalAmount.toFixed(2)}</span>
+                    <div className="flex justify-between items-center mb-5">
+                        <span className="text-lg font-bold text-slate-800">Total (Est):</span>
+                        <span className="text-xl font-bold text-emerald-600">${cartTotalAmount.toFixed(2)}</span>
                     </div>
 
-                    <div className="d-grid">
-                        <Button 
-                            variant="primary" 
-                            size="lg" 
+                    <div className="w-full">
+                        <button 
+                            className="w-full bg-violet-600 hover:bg-violet-700 text-white font-bold py-3.5 px-5 rounded-xl shadow-md transition-all text-lg disabled:opacity-50 disabled:cursor-not-allowed"
                             onClick={onPlaceOrder}
                             disabled={cart.length === 0 || isSubmitting}
                         >
                             {isSubmitting ? 'Processing Order...' : 'Place Order'}
-                        </Button>
+                        </button>
                     </div>
-                    <div className="text-center mt-2">
-                        <small className="text-muted" style={{ fontSize: '0.7rem' }}>
+                    <div className="text-center mt-3">
+                        <small className="text-slate-400 text-xs font-medium">
                             Final order total is calculated by the server.
                         </small>
                     </div>
                 </div>
-            </Card.Body>
-        </Card>
+            </div>
+        </div>
     );
 }

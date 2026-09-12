@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Alert, Spinner } from 'react-bootstrap';
 import { reportService } from '../services/api';
 
 import ReportFilters from '../components/reports/ReportFilters';
@@ -64,8 +63,8 @@ export default function Reports() {
     };
 
     return (
-        <Container fluid className="py-4">
-            <h2 className="text-secondary fw-bold mb-4">Business Analytics & Reports</h2>
+        <div className="w-full px-4 py-6">
+            <h2 className="text-2xl font-bold text-slate-700 mb-6">Business Analytics & Reports</h2>
 
             <ReportFilters 
                 startDate={startDate} 
@@ -76,22 +75,26 @@ export default function Reports() {
                 loading={loading}
             />
 
-            {error && <Alert variant="danger">{error}</Alert>}
+            {error && (
+                <div className="bg-red-100 text-red-800 p-4 rounded-xl mb-6 font-medium">
+                    {error}
+                </div>
+            )}
 
             {loading ? (
-                <div className="text-center py-5">
-                    <Spinner animation="border" variant="primary" />
-                    <p className="mt-3 text-muted">Crunching numbers...</p>
+                <div className="flex flex-col items-center justify-center py-10">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-violet-600"></div>
+                    <p className="mt-3 text-slate-500 font-medium">Crunching numbers...</p>
                 </div>
             ) : (
-                <>
+                <div className="space-y-6 mt-6">
                     <SalesSummary summary={salesSummary} />
                     
                     <SalesChart data={dailySales} />
                     
                     <ProductReportTable products={productReport} />
-                </>
+                </div>
             )}
-        </Container>
+        </div>
     );
 }

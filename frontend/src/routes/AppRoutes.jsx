@@ -5,6 +5,8 @@ import MainLayout from '../layouts/MainLayout';
 
 // Pages
 import Login from '../pages/Login';
+import Register from '../pages/Register';
+import Home from '../pages/Home';
 import Dashboard from '../pages/Dashboard';
 import Categories from '../pages/Categories';
 import Products from '../pages/Products';
@@ -29,7 +31,10 @@ const ProtectedRoute = ({ children }) => {
 const AppRoutes = () => {
     return (
         <Routes>
+            {/* Public Routes */}
+            <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             
             {/* Protected Routes wrapped in MainLayout */}
             <Route path="/" element={
@@ -37,7 +42,6 @@ const AppRoutes = () => {
                     <MainLayout />
                 </ProtectedRoute>
             }>
-                <Route index element={<Navigate to="/dashboard" replace />} />
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="categories" element={<Categories />} />
                 <Route path="products" element={<Products />} />

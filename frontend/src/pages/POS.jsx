@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
 import { productService, categoryService, orderService } from '../services/api';
 import useCart from '../hooks/useCart';
 
@@ -112,50 +111,52 @@ export default function POS() {
     };
 
     return (
-        <Container fluid className="h-100 py-3 d-flex flex-column" style={{ maxHeight: '100vh', overflow: 'hidden' }}>
-            <div className="d-flex justify-content-between align-items-center mb-3 flex-shrink-0">
-                <h2 className="text-secondary fw-bold mb-0">POS Terminal</h2>
-                {successMsg && <Alert variant="success" className="mb-0 py-2">{successMsg}</Alert>}
+        <div className="flex flex-col h-screen py-3 px-4 overflow-hidden bg-slate-50">
+            <div className="flex justify-between items-center mb-3 shrink-0">
+                <h2 className="text-2xl font-bold text-slate-700">POS Terminal</h2>
+                {successMsg && (
+                    <div className="bg-emerald-100 text-emerald-800 px-4 py-2 rounded-xl font-medium m-0">
+                        {successMsg}
+                    </div>
+                )}
             </div>
 
-            <Row className="flex-grow-1 overflow-hidden">
+            <div className="flex flex-col lg:flex-row flex-grow overflow-hidden gap-4">
                 {/* Left Side: Product Grid */}
-                <Col lg={8} className="h-100 d-flex flex-column pe-lg-3 mb-4 mb-lg-0">
-                    <Card className="shadow-sm border-0 mb-3 flex-shrink-0">
-                        <Card.Body className="py-2">
-                            <Form onSubmit={handleSearch} className="d-flex gap-2">
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Search by SKU or name..."
-                                    value={search}
-                                    onChange={(e) => setSearch(e.target.value)}
-                                    className="flex-grow-1"
-                                />
-                                <Form.Select 
-                                    value={categoryId} 
-                                    onChange={(e) => setCategoryId(e.target.value)}
-                                    style={{ maxWidth: '200px' }}
-                                >
-                                    <option value="">All Categories</option>
-                                    {categories.map(c => (
-                                        <option key={c.id} value={c.id}>{c.name}</option>
-                                    ))}
-                                </Form.Select>
-                            </Form>
-                        </Card.Body>
-                    </Card>
+                <div className="lg:w-2/3 xl:w-3/4 h-full flex flex-col mb-4 lg:mb-0">
+                    <div className="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-4 mb-4 shrink-0">
+                        <form onSubmit={handleSearch} className="flex gap-2">
+                            <input
+                                type="text"
+                                placeholder="Search by SKU or name..."
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                                className="flex-grow px-4 py-3 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-violet-500/20 focus:border-violet-500 outline-none text-slate-700 text-sm font-medium transition-all"
+                            />
+                            <select 
+                                value={categoryId} 
+                                onChange={(e) => setCategoryId(e.target.value)}
+                                className="w-[200px] px-4 py-3 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-violet-500/20 focus:border-violet-500 outline-none text-slate-700 text-sm font-medium transition-all"
+                            >
+                                <option value="">All Categories</option>
+                                {categories.map(c => (
+                                    <option key={c.id} value={c.id}>{c.name}</option>
+                                ))}
+                            </select>
+                        </form>
+                    </div>
 
-                    <div className="flex-grow-1 overflow-auto pe-2" style={{ minHeight: '300px' }}>
+                    <div className="flex-grow overflow-auto pr-2 min-h-[300px]">
                         <ProductGrid 
                             products={products} 
                             loading={loadingProducts} 
                             onAddToCart={addToCart} 
                         />
                     </div>
-                </Col>
+                </div>
 
                 {/* Right Side: Cart */}
-                <Col lg={4} className="h-100 pb-3">
+                <div className="lg:w-1/3 xl:w-1/4 h-full pb-3">
                     <Cart 
                         cart={cart}
                         updateQuantity={updateQuantity}
@@ -169,8 +170,8 @@ export default function POS() {
                         isSubmitting={isSubmitting}
                         error={checkoutError}
                     />
-                </Col>
-            </Row>
-        </Container>
+                </div>
+            </div>
+        </div>
     );
 }
