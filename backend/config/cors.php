@@ -24,6 +24,7 @@ return [
         'http://localhost:5173',   // Vite dev server
         'http://127.0.0.1:3000',
         'http://127.0.0.1:5173',
+        'https://minipos-app-123.loca.lt',
     ],
 
     'allowed_origins_patterns' => [],
