@@ -50,6 +50,19 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/customers', [\App\Http\Controllers\CustomerController::class, 'store']);
     Route::get('/customers/{id}', [\App\Http\Controllers\CustomerController::class, 'show']);
 
+    // Order Routes (Viewable and Creatable by Admin and Cashier)
+    Route::get('/orders', [\App\Http\Controllers\OrderController::class, 'index']);
+    Route::post('/orders', [\App\Http\Controllers\OrderController::class, 'store']);
+    Route::get('/orders/{id}', [\App\Http\Controllers\OrderController::class, 'show']);
+    Route::put('/orders/{id}/status', [\App\Http\Controllers\OrderController::class, 'updateStatus']);
+
+    // Reports Routes (Viewable by Admin and Cashier)
+    Route::get('/reports/sales', [\App\Http\Controllers\ReportController::class, 'sales']);
+    Route::get('/reports/products', [\App\Http\Controllers\ReportController::class, 'products']);
+
+    // Dashboard Route (Viewable by Admin and Cashier)
+    Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index']);
+
     // Admin only routes
     Route::middleware('role:admin')->group(function () {
         // Category Admin Routes
