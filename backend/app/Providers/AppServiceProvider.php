@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,10 +20,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if (env('DB_CONNECTION') === 'sqlite' && file_exists('/tmp/database.sqlite') && filesize('/tmp/database.sqlite') === 0) {
-            try {
-                \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
-            } catch (\Exception $e) {}
+        // Force HTTPS URLs on Vercel cloud environment to prevent 302 HTTP mixed content blocks
+        if (env('APP_ENV') === 'production' || isset($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
+            URL::forceScheme('https');
         }
     }
 }

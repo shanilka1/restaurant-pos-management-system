@@ -13,8 +13,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        // Handle CORS for all requests
+        // Handle CORS and Serverless Auth Fallback for Vercel
         $middleware->prepend(HandleCors::class);
+        $middleware->prepend(\App\Http\Middleware\ServerlessAuthFallback::class);
 
         // Sanctum stateful API middleware (for SPA authentication)
         $middleware->statefulApi();

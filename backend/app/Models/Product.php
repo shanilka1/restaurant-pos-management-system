@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {
-    /** @use HasFactory<\Database\Factories\ProductFactory> */
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
@@ -31,6 +30,11 @@ class Product extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function recipes(): HasMany
+    {
+        return $this->hasMany(ProductRecipe::class);
     }
 
     public function orderItems(): HasMany

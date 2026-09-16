@@ -4,9 +4,16 @@ import { authService } from '../services/api';
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
     const [token, setToken] = useState(localStorage.getItem('token') || null);
-    const [role, setRole] = useState(null);
+    const [user, setUser] = useState(() => {
+        try {
+            const savedUser = localStorage.getItem('user');
+            return savedUser ? JSON.parse(savedUser) : null;
+        } catch {
+            return null;
+        }
+    });
+    const [role, setRole] = useState(() => user?.role || null);
     const [loading, setLoading] = useState(true);
 
     const logout = async () => {
@@ -18,6 +25,7 @@ export const AuthProvider = ({ children }) => {
             console.error('Logout error:', error);
         } finally {
             localStorage.removeItem('token');
+            localStorage.removeItem('user');
             setToken(null);
             setUser(null);
             setRole(null);
@@ -25,14 +33,19 @@ export const AuthProvider = ({ children }) => {
     };
 
     useEffect(() => {
-        if (token) {
+        if (token && !user) {
             authService.getUser()
                 .then(response => {
-                    setUser(response.data.data);
-                    setRole(response.data.data.role);
+                    const fetchedUser = response.data.data;
+                    setUser(fetchedUser);
+                    setRole(fetchedUser.role);
+                    localStorage.setItem('user', JSON.stringify(fetchedUser));
                 })
                 .catch(() => {
-                    logout();
+                    // Silently fail or logout only if no cached user exists
+                    if (!localStorage.getItem('user')) {
+                        logout();
+                    }
                 })
                 .finally(() => setLoading(false));
         } else {
@@ -45,9 +58,11 @@ export const AuthProvider = ({ children }) => {
         const { user: userData, access_token } = response.data.data;
         
         localStorage.setItem('token', access_token);
+        localStorage.setItem('user', JSON.stringify(userData));
         setToken(access_token);
         setUser(userData);
         setRole(userData.role);
+        return userData;
     };
 
     const register = async (data) => {
@@ -55,9 +70,11 @@ export const AuthProvider = ({ children }) => {
         const { user: userData, access_token } = response.data.data;
         
         localStorage.setItem('token', access_token);
+        localStorage.setItem('user', JSON.stringify(userData));
         setToken(access_token);
         setUser(userData);
         setRole(userData.role);
+        return userData;
     };
 
     return (

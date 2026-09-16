@@ -1,20 +1,15 @@
 import axios from 'axios';
 
+const API_URL = import.meta.env.VITE_API_URL || 'https://backend-livid-six-38.vercel.app/api';
+
 const api = axios.create({
-    baseURL: 'https://minipos-backend-123.loca.lt/api',
+    baseURL: API_URL,
     headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Bypass-Tunnel-Reminder': 'true',
-        'ngrok-skip-browser-warning': 'true'
     },
-    // Required for Sanctum CSRF protection if SPA and API are on same domain,
-    // but since we're using tokens directly, withCredentials isn't strictly necessary for token-based,
-    // but it's good practice for stateful Sanctum.
-    // withCredentials: true 
 });
 
-// Request interceptor to attach the bearer token
 api.interceptors.request.use(config => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -23,15 +18,14 @@ api.interceptors.request.use(config => {
     return config;
 });
 
-// Response interceptor to handle global errors like 401 Unauthorized
 api.interceptors.response.use(
     response => response,
     error => {
         if (error.response && error.response.status === 401) {
-            // Token expired or invalid
-            localStorage.removeItem('token');
-            // Avoid looping if already on login
-            if (window.location.pathname !== '/login') {
+            const path = window.location.pathname;
+            if (path !== '/login' && path !== '/register') {
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
                 window.location.href = '/login';
             }
         }
@@ -39,7 +33,6 @@ api.interceptors.response.use(
     }
 );
 
-// Services exports
 export const authService = {
     register: (data) => api.post('/register', data),
     login: (credentials) => api.post('/login', credentials),
@@ -76,6 +69,50 @@ export const orderService = {
     getById: (id) => api.get(`/orders/${id}`),
     create: (data) => api.post('/orders', data),
     updateStatus: (id, status) => api.put(`/orders/${id}/status`, { status }),
+};
+
+export const tableService = {
+    getAll: (params) => api.get('/tables', { params }),
+    create: (data) => api.post('/tables', data),
+    update: (id, data) => api.put(`/tables/${id}`, data),
+    switchTable: (data) => api.post('/tables/switch', data),
+    delete: (id) => api.delete(`/tables/${id}`),
+};
+
+export const shiftService = {
+    getCurrent: () => api.get('/shifts/current'),
+    open: (data) => api.post('/shifts/open', data),
+    close: (id, data) => api.post(`/shifts/${id}/close`, data),
+    cashMovement: (data) => api.post('/shifts/cash-movement', data),
+    getHistory: () => api.get('/shifts/history'),
+};
+
+export const kitchenService = {
+    getQueue: () => api.get('/kitchen/queue'),
+    updateOrderStatus: (id, kitchenStatus) => api.put(`/kitchen/orders/${id}/status`, { kitchen_status: kitchenStatus }),
+    updateItemStatus: (itemId, itemStatus) => api.put(`/kitchen/items/${itemId}/status`, { item_status: itemStatus }),
+};
+
+export const reservationService = {
+    getAll: (params) => api.get('/reservations', { params }),
+    create: (data) => api.post('/reservations', data),
+    updateStatus: (id, status) => api.put(`/reservations/${id}/status`, { status }),
+    delete: (id) => api.delete(`/reservations/${id}`),
+};
+
+export const ingredientService = {
+    getAll: () => api.get('/ingredients'),
+    create: (data) => api.post('/ingredients', data),
+    update: (id, data) => api.put(`/ingredients/${id}`, data),
+    delete: (id) => api.delete(`/ingredients/${id}`),
+    getRecipes: (productId) => api.get(`/products/${productId}/recipes`),
+    saveRecipes: (productId, recipes) => api.post(`/products/${productId}/recipes`, { recipes }),
+};
+
+export const heldOrderService = {
+    getAll: () => api.get('/held-orders'),
+    create: (data) => api.post('/held-orders', data),
+    delete: (id) => api.delete(`/held-orders/${id}`),
 };
 
 export const stockService = {

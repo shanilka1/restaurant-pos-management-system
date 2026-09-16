@@ -6,26 +6,13 @@ return [
     |--------------------------------------------------------------------------
     | Cross-Origin Resource Sharing (CORS) Configuration
     |--------------------------------------------------------------------------
-    |
-    | Here you may configure your settings for cross-origin resource sharing
-    | or "CORS". This determines what cross-origin operations may execute
-    | in web browsers. You are free to adjust these settings as needed.
-    |
-    | To learn more: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
-    |
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+    'paths' => ['api/*', 'sanctum/csrf-cookie', '*'],
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => [
-        'http://localhost:3000',   // React CRA dev server
-        'http://localhost:5173',   // Vite dev server
-        'http://127.0.0.1:3000',
-        'http://127.0.0.1:5173',
-        'https://minipos-app-123.loca.lt',
-    ],
+    'allowed_origins' => ['*'],
 
     'allowed_origins_patterns' => [],
 
@@ -35,10 +22,6 @@ return [
 
     'max_age' => 0,
 
-    /*
-    | supports_credentials must be true for Laravel Sanctum
-    | cookie-based SPA authentication to work.
-    */
-    'supports_credentials' => true,
+    'supports_credentials' => false,
 
 ];

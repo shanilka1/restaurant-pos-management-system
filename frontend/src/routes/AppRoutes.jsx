@@ -15,6 +15,10 @@ import Customers from '../pages/Customers';
 import POS from '../pages/POS';
 import Orders from '../pages/Orders';
 import Reports from '../pages/Reports';
+import TableManagement from '../pages/TableManagement';
+import KitchenDisplay from '../pages/KitchenDisplay';
+import Reservations from '../pages/Reservations';
+import Ingredients from '../pages/Ingredients';
 
 const ProtectedRoute = ({ children }) => {
     const { token, loading } = useContext(AuthContext);
@@ -43,11 +47,15 @@ const AppRoutes = () => {
                 </ProtectedRoute>
             }>
                 <Route path="dashboard" element={<Dashboard />} />
+                <Route path="pos" element={<POS />} />
+                <Route path="tables" element={<TableManagement />} />
+                <Route path="kitchen" element={<KitchenDisplay />} />
+                <Route path="reservations" element={<Reservations />} />
+                <Route path="ingredients" element={<Ingredients />} />
                 <Route path="categories" element={<Categories />} />
                 <Route path="products" element={<Products />} />
                 <Route path="stock" element={<Stock />} />
                 <Route path="customers" element={<Customers />} />
-                <Route path="pos" element={<POS />} />
                 <Route path="orders" element={<Orders />} />
                 <Route path="reports" element={<Reports />} />
             </Route>

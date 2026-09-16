@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class OrderItem extends Model
 {
-    /** @use HasFactory<\Database\Factories\OrderItemFactory> */
     use HasFactory;
 
     protected $fillable = [
@@ -17,11 +16,15 @@ class OrderItem extends Model
         'quantity',
         'unit_price',
         'subtotal',
+        'modifiers',
+        'notes',
+        'item_status',
     ];
 
     protected $casts = [
         'unit_price' => 'decimal:2',
         'subtotal' => 'decimal:2',
+        'modifiers' => 'array',
     ];
 
     public function order(): BelongsTo
