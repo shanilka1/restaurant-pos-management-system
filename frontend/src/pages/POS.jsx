@@ -425,7 +425,7 @@ export default function POS() {
                                     onClick={handleCheckout}
                                     disabled={cart.length === 0 || isSubmitting}
                                 >
-                                    {isSubmitting ? 'Processing Order...' : `💳 Complete Checkout (Rs {grandTotal.toFixed(2)})`}
+                                    {isSubmitting ? 'Processing Order...' : `💳 Complete Checkout (Rs ${grandTotal.toFixed(2)})`}
                                 </Button>
 
                                 <Button

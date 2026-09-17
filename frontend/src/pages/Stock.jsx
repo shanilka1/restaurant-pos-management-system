@@ -119,7 +119,7 @@ export default function Stock() {
                                 <button 
                                     disabled={pagination.current_page === 1}
                                     onClick={() => setCurrentPage(prev => prev - 1)} 
-                                    className={`bg-white border border-slate-200 text-slate-700 font-bold py-2 px-4 rounded-xl shadow-sm transition-all Rs {pagination.current_page === 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-slate-50'}`}
+                                    className={`bg-white border border-slate-200 text-slate-700 font-bold py-2 px-4 rounded-xl shadow-sm transition-all ${pagination.current_page === 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-slate-50'}`}
                                 >
                                     Previous
                                 </button>
@@ -129,7 +129,7 @@ export default function Stock() {
                                 <button 
                                     disabled={pagination.current_page === pagination.last_page}
                                     onClick={() => setCurrentPage(prev => prev + 1)}
-                                    className={`bg-white border border-slate-200 text-slate-700 font-bold py-2 px-4 rounded-xl shadow-sm transition-all Rs {pagination.current_page === pagination.last_page ? 'opacity-50 cursor-not-allowed' : 'hover:bg-slate-50'}`}
+                                    className={`bg-white border border-slate-200 text-slate-700 font-bold py-2 px-4 rounded-xl shadow-sm transition-all ${pagination.current_page === pagination.last_page ? 'opacity-50 cursor-not-allowed' : 'hover:bg-slate-50'}`}
                                 >
                                     Next
                                 </button>

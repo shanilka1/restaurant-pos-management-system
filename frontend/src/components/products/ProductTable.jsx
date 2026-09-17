@@ -42,7 +42,7 @@ export default function ProductTable({ products, onEdit, onDelete }) {
                                     : '-'}
                             </td>
                             <td className="py-4 px-4 text-sm font-semibold text-slate-700">
-                                <span className={`px-2.5 py-0.5 rounded-full text-xs font-medium Rs {prod.is_active ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-800'}`}>
+                                <span className={`px-2.5 py-0.5 rounded-full text-xs font-medium ${prod.is_active ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-800'}`}>
                                     {prod.is_active ? 'Active' : 'Inactive'}
                                 </span>
                             </td>

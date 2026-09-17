@@ -119,7 +119,7 @@ export default function StockMovementForm({ show, handleClose, onSaveSuccess }) 
                                 onChange={handleChange}
                                 required
                                 disabled={loadingProducts}
-                                className={`w-full px-4 py-3 rounded-xl border bg-white focus:ring-2 focus:ring-violet-500/20 focus:border-violet-500 outline-none text-slate-700 text-sm font-medium transition-all Rs {validationErrors.product_id ? 'border-red-500' : 'border-slate-200'}`}
+                                className={`w-full px-4 py-3 rounded-xl border bg-white focus:ring-2 focus:ring-violet-500/20 focus:border-violet-500 outline-none text-slate-700 text-sm font-medium transition-all ${validationErrors.product_id ? 'border-red-500' : 'border-slate-200'}`}
                             >
                                 <option value="">{loadingProducts ? 'Loading...' : 'Select Product'}</option>
                                 {products.map(p => (
@@ -140,7 +140,7 @@ export default function StockMovementForm({ show, handleClose, onSaveSuccess }) 
                                     value={formData.type}
                                     onChange={handleChange}
                                     required
-                                    className={`w-full px-4 py-3 rounded-xl border bg-white focus:ring-2 focus:ring-violet-500/20 focus:border-violet-500 outline-none text-slate-700 text-sm font-medium transition-all Rs {validationErrors.type ? 'border-red-500' : 'border-slate-200'}`}
+                                    className={`w-full px-4 py-3 rounded-xl border bg-white focus:ring-2 focus:ring-violet-500/20 focus:border-violet-500 outline-none text-slate-700 text-sm font-medium transition-all ${validationErrors.type ? 'border-red-500' : 'border-slate-200'}`}
                                 >
                                     <option value="in">IN (Add Stock)</option>
                                     <option value="out">OUT (Remove Stock)</option>
@@ -162,7 +162,7 @@ export default function StockMovementForm({ show, handleClose, onSaveSuccess }) 
                                     value={formData.quantity}
                                     onChange={handleChange}
                                     required
-                                    className={`w-full px-4 py-3 rounded-xl border bg-white focus:ring-2 focus:ring-violet-500/20 focus:border-violet-500 outline-none text-slate-700 text-sm font-medium transition-all Rs {validationErrors.quantity ? 'border-red-500' : 'border-slate-200'}`}
+                                    className={`w-full px-4 py-3 rounded-xl border bg-white focus:ring-2 focus:ring-violet-500/20 focus:border-violet-500 outline-none text-slate-700 text-sm font-medium transition-all ${validationErrors.quantity ? 'border-red-500' : 'border-slate-200'}`}
                                 />
                                 {validationErrors.quantity && <p className="text-red-500 text-xs font-semibold mt-1">{validationErrors.quantity}</p>}
                             </div>
@@ -179,7 +179,7 @@ export default function StockMovementForm({ show, handleClose, onSaveSuccess }) 
                                 placeholder="Optional reason for the movement (e.g. Received new shipment)"
                                 value={formData.reason}
                                 onChange={handleChange}
-                                className={`w-full px-4 py-3 rounded-xl border bg-white focus:ring-2 focus:ring-violet-500/20 focus:border-violet-500 outline-none text-slate-700 text-sm font-medium transition-all Rs {validationErrors.reason ? 'border-red-500' : 'border-slate-200'}`}
+                                className={`w-full px-4 py-3 rounded-xl border bg-white focus:ring-2 focus:ring-violet-500/20 focus:border-violet-500 outline-none text-slate-700 text-sm font-medium transition-all ${validationErrors.reason ? 'border-red-500' : 'border-slate-200'}`}
                             />
                             {validationErrors.reason && <p className="text-red-500 text-xs font-semibold mt-1">{validationErrors.reason}</p>}
                         </div>

@@ -58,7 +58,7 @@ const ShiftModal = ({ show, onHide, onShiftChange }) => {
             setLoading(true);
             setError('');
             const res = await shiftService.close(currentShift.id, { closing_cash: parseFloat(closingCash) });
-            setSuccess(`Shift Closed! Z-Report Generated. Variance: Rs {res.data.data.variance}`);
+            setSuccess(`Shift Closed! Z-Report Generated. Variance: Rs ${res.data.data.variance}`);
             setCurrentShift(null);
             if (onShiftChange) onShiftChange(null);
         } catch (err) {
@@ -79,7 +79,7 @@ const ShiftModal = ({ show, onHide, onShiftChange }) => {
                 amount: parseFloat(movementAmount),
                 reason: movementReason
             });
-            setSuccess(`Cash Rs {movementType.toUpperCase()} of Rs {movementAmount} recorded!`);
+            setSuccess(`Cash ${movementType.toUpperCase()} of Rs ${movementAmount} recorded!`);
             setMovementAmount('');
             setMovementReason('');
             fetchCurrentShift();
@@ -214,7 +214,7 @@ const ShiftModal = ({ show, onHide, onShiftChange }) => {
                                         {currentShift.cash_movements.map((m, idx) => (
                                             <tr key={idx}>
                                                 <td>
-                                                    <span className={`badge Rs {m.type === 'in' ? 'bg-success' : 'bg-danger'}`}>
+                                                    <span className={`badge ${m.type === 'in' ? 'bg-success' : 'bg-danger'}`}>
                                                         {m.type.toUpperCase()}
                                                     </span>
                                                 </td>

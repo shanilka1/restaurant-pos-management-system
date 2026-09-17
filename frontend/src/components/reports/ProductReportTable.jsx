@@ -31,7 +31,7 @@ export default function ProductReportTable({ products }) {
                     {products.map((p, index) => (
                         <tr key={p.id}>
                             <td className="align-middle fw-bold">
-                                {index < 3 && <span className="me-2" title={`Rank Rs {index + 1}`}>🏆</span>}
+                                {index < 3 && <span className="me-2" title={`Rank ${index + 1}`}>🏆</span>}
                                 {p.product_name}
                             </td>
                             <td className="align-middle">{p.sku}</td>

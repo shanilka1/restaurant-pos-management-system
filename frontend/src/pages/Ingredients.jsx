@@ -87,7 +87,7 @@ const Ingredients = () => {
         try {
             const valid = recipeItems.filter(r => r.ingredient_id && r.quantity_required > 0);
             await ingredientService.saveRecipes(selectedProduct.id, valid);
-            setSuccess(`Recipe saved for Rs {selectedProduct.name}`);
+            setSuccess(`Recipe saved for ${selectedProduct.name}`);
             setShowRecipeModal(false);
         } catch (err) {
             setError(err.response?.data?.message || 'Failed to save recipe');

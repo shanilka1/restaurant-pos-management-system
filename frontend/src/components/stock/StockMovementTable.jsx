@@ -36,7 +36,7 @@ export default function StockMovementTable({ movements }) {
                 </thead>
                 <tbody>
                     {movements.map((mov, idx) => (
-                        <tr key={mov.id} className={`hover:bg-slate-50/50 Rs {idx !== movements.length - 1 ? 'border-b border-slate-100' : ''}`}>
+                        <tr key={mov.id} className={`hover:bg-slate-50/50 ${idx !== movements.length - 1 ? 'border-b border-slate-100' : ''}`}>
                             <td className="py-4 text-sm font-semibold text-slate-700 px-4 align-middle">{mov.id}</td>
                             <td className="py-4 text-sm font-semibold text-slate-700 px-4 align-middle">{new Date(mov.created_at).toLocaleString()}</td>
                             <td className="py-4 text-sm font-semibold text-slate-700 px-4 align-middle">

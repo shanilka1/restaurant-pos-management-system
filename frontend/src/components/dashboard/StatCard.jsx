@@ -29,12 +29,12 @@ export default function StatCard({ title, value, variant = 'primary' }) {
                     <p className="text-xs font-extrabold text-amber-400 uppercase tracking-wider mb-2">{title}</p>
                     <h3 className="text-3xl font-extrabold text-white font-[Poppins]">{value}</h3>
                 </div>
-                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br Rs {bgClass} flex items-center justify-center text-xl font-bold shadow-lg group-hover:scale-110 transition-transform`}>
+                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${bgClass} flex items-center justify-center text-xl font-bold shadow-lg group-hover:scale-110 transition-transform`}>
                     {icon}
                 </div>
             </div>
             
-            <div className={`absolute -bottom-4 -right-4 w-24 h-24 rounded-full bg-gradient-to-br Rs {bgClass} opacity-10 blur-2xl group-hover:opacity-20 transition-opacity`}></div>
+            <div className={`absolute -bottom-4 -right-4 w-24 h-24 rounded-full bg-gradient-to-br ${bgClass} opacity-10 blur-2xl group-hover:opacity-20 transition-opacity`}></div>
         </div>
     );
 }

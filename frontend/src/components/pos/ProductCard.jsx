@@ -14,12 +14,12 @@ export default function ProductCard({ product, onAdd }) {
                 
                 <Card.Text className="text-muted small mb-3 flex-grow-1">
                     SKU: {product.sku} <br/>
-                    {product.category?.name && `Cat: Rs {product.category.name}`}
+                    {product.category?.name && `Cat: ${product.category.name}`}
                 </Card.Text>
 
                 <div className="mt-auto d-flex justify-content-between align-items-center">
                     <small className={isOutOfStock ? 'text-danger fw-bold' : 'text-success'}>
-                        {product.stock_quantity !== null ? `Stock: Rs {product.stock_quantity}` : 'In Stock'}
+                        {product.stock_quantity !== null ? `Stock: ${product.stock_quantity}` : 'In Stock'}
                     </small>
                     <Button 
                         variant={isOutOfStock ? 'secondary' : 'outline-primary'} 

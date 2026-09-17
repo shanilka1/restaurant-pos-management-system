@@ -101,13 +101,13 @@ const KitchenDisplay = () => {
 
                         return (
                             <Col key={order.id} xs={12} sm={6} md={4} lg={3}>
-                                <Card className={`h-100 shadow border-2 Rs {isUrgent ? 'border-danger' : 'border-warning'} bg-secondary bg-opacity-25 text-white`}>
-                                    <Card.Header className={`d-flex justify-content-between align-items-center py-2 Rs {isUrgent ? 'bg-danger text-white' : 'bg-warning text-dark'}`}>
+                                <Card className={`h-100 shadow border-2 ${isUrgent ? 'border-danger' : 'border-warning'} bg-secondary bg-opacity-25 text-white`}>
+                                    <Card.Header className={`d-flex justify-content-between align-items-center py-2 ${isUrgent ? 'bg-danger text-white' : 'bg-warning text-dark'}`}>
                                         <div>
                                             <span className="fw-bold fs-5">TICKET #{order.id}</span>
                                             <div className="small fw-semibold">
                                                 {order.order_type?.toUpperCase()}
-                                                {order.table && ` • Rs {order.table.table_number}`}
+                                                {order.table && ` • ${order.table.table_number}`}
                                             </div>
                                         </div>
                                         <div className="text-end">

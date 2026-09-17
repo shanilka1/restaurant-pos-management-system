@@ -46,7 +46,7 @@ export default function SalesChart({ data }) {
                             axisLine={false}
                             tickLine={false}
                             tick={{ fill: '#cbd5e1', fontSize: 12, fontWeight: 'bold' }}
-                            tickFormatter={(value) => `Rs {value}`}
+                            tickFormatter={(value) => `Rs ${value}`}
                             dx={-10}
                         />
                         <Tooltip 
@@ -58,8 +58,8 @@ export default function SalesChart({ data }) {
                                 boxShadow: '0 10px 25px -3px rgb(0 0 0 / 0.5)'
                             }}
                             itemStyle={{ color: '#fbbf24', fontWeight: 'bold' }}
-                            formatter={(value) => [`Rs {value.toFixed(2)}`, 'Revenue']}
-                            labelFormatter={(label) => `Date: Rs {label}`}
+                            formatter={(value) => [`Rs ${value.toFixed(2)}`, 'Revenue']}
+                            labelFormatter={(label) => `Date: ${label}`}
                         />
                     </LineChart>
                 </ResponsiveContainer>

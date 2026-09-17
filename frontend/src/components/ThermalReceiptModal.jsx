@@ -36,7 +36,7 @@ const ThermalReceiptModal = ({ show, onHide, order }) => {
                     </style>
                 </head>
                 <body>
-                    Rs {printContent}
+                    ${printContent}
                 </body>
             </html>
         `);
