@@ -58,7 +58,7 @@ const ShiftModal = ({ show, onHide, onShiftChange }) => {
             setLoading(true);
             setError('');
             const res = await shiftService.close(currentShift.id, { closing_cash: parseFloat(closingCash) });
-            setSuccess(`Shift Closed! Z-Report Generated. Variance: $${res.data.data.variance}`);
+            setSuccess(`Shift Closed! Z-Report Generated. Variance: Rs {res.data.data.variance}`);
             setCurrentShift(null);
             if (onShiftChange) onShiftChange(null);
         } catch (err) {
@@ -79,7 +79,7 @@ const ShiftModal = ({ show, onHide, onShiftChange }) => {
                 amount: parseFloat(movementAmount),
                 reason: movementReason
             });
-            setSuccess(`Cash ${movementType.toUpperCase()} of $${movementAmount} recorded!`);
+            setSuccess(`Cash Rs {movementType.toUpperCase()} of Rs {movementAmount} recorded!`);
             setMovementAmount('');
             setMovementReason('');
             fetchCurrentShift();
@@ -105,7 +105,7 @@ const ShiftModal = ({ show, onHide, onShiftChange }) => {
                         <p className="text-muted small">Enter the starting float count in your cash drawer to open the POS shift.</p>
                         <Form onSubmit={handleOpenShift}>
                             <Form.Group className="mb-3">
-                                <Form.Label className="fw-bold">Opening Cash Float ($)</Form.Label>
+                                <Form.Label className="fw-bold">Opening Cash Float (Rs)</Form.Label>
                                 <Form.Control
                                     type="number"
                                     step="0.01"
@@ -131,7 +131,7 @@ const ShiftModal = ({ show, onHide, onShiftChange }) => {
                                     </Col>
                                     <Col md={6} className="text-md-end mt-3 mt-md-0">
                                         <div className="fs-5 fw-bold text-dark">
-                                            Opening Float: <span className="text-success">${parseFloat(currentShift.opening_cash).toFixed(2)}</span>
+                                            Opening Float: <span className="text-success">Rs {parseFloat(currentShift.opening_cash).toFixed(2)}</span>
                                         </div>
                                     </Col>
                                 </Row>
@@ -154,7 +154,7 @@ const ShiftModal = ({ show, onHide, onShiftChange }) => {
                                                 <Form.Control
                                                     type="number"
                                                     step="0.01"
-                                                    placeholder="Amount ($)"
+                                                    placeholder="Amount (Rs)"
                                                     value={movementAmount}
                                                     onChange={(e) => setMovementAmount(e.target.value)}
                                                     required
@@ -180,7 +180,7 @@ const ShiftModal = ({ show, onHide, onShiftChange }) => {
                                     <h6 className="fw-bold text-dark border-bottom pb-2">🔒 Close Shift & Z-Report</h6>
                                     <Form onSubmit={handleCloseShift}>
                                         <Form.Group className="mb-2">
-                                            <Form.Label className="small fw-bold">Count Actual Cash in Drawer ($)</Form.Label>
+                                            <Form.Label className="small fw-bold">Count Actual Cash in Drawer (Rs)</Form.Label>
                                             <Form.Control
                                                 type="number"
                                                 step="0.01"
@@ -214,11 +214,11 @@ const ShiftModal = ({ show, onHide, onShiftChange }) => {
                                         {currentShift.cash_movements.map((m, idx) => (
                                             <tr key={idx}>
                                                 <td>
-                                                    <span className={`badge ${m.type === 'in' ? 'bg-success' : 'bg-danger'}`}>
+                                                    <span className={`badge Rs {m.type === 'in' ? 'bg-success' : 'bg-danger'}`}>
                                                         {m.type.toUpperCase()}
                                                     </span>
                                                 </td>
-                                                <td>${parseFloat(m.amount).toFixed(2)}</td>
+                                                <td>Rs {parseFloat(m.amount).toFixed(2)}</td>
                                                 <td>{m.reason}</td>
                                                 <td>{new Date(m.created_at).toLocaleTimeString()}</td>
                                             </tr>

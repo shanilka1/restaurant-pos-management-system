@@ -21,7 +21,7 @@ export default function OrderStatusControl({ order, onStatusUpdated }) {
         setError(null);
 
         try {
-            await orderService.updateStatus(order.id, { status: selectedStatus });
+            await orderService.updateStatus(order.id, selectedStatus);
             onStatusUpdated();
         } catch (err) {
             if (err.response && err.response.status === 422) {

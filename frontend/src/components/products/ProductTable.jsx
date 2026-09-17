@@ -35,14 +35,14 @@ export default function ProductTable({ products, onEdit, onDelete }) {
                             <td className="py-4 px-4 text-sm font-bold text-slate-900">{prod.name}</td>
                             <td className="py-4 px-4 text-sm font-semibold text-slate-700">{prod.sku}</td>
                             <td className="py-4 px-4 text-sm font-semibold text-slate-700">{prod.category?.name || '-'}</td>
-                            <td className="py-4 px-4 text-sm font-semibold text-slate-700">${parseFloat(prod.price).toFixed(2)}</td>
+                            <td className="py-4 px-4 text-sm font-semibold text-slate-700">Rs {parseFloat(prod.price).toFixed(2)}</td>
                             <td className="py-4 px-4 text-sm font-semibold text-slate-700">
                                 {prod.stock_quantity !== null && prod.stock_quantity !== undefined 
                                     ? prod.stock_quantity 
                                     : '-'}
                             </td>
                             <td className="py-4 px-4 text-sm font-semibold text-slate-700">
-                                <span className={`px-2.5 py-0.5 rounded-full text-xs font-medium ${prod.is_active ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-800'}`}>
+                                <span className={`px-2.5 py-0.5 rounded-full text-xs font-medium Rs {prod.is_active ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-800'}`}>
                                     {prod.is_active ? 'Active' : 'Inactive'}
                                 </span>
                             </td>

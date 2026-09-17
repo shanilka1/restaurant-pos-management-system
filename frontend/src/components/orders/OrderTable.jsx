@@ -43,7 +43,7 @@ export default function OrderTable({ orders, onViewDetails }) {
                             <td className="py-4 text-sm font-medium text-slate-600">{new Date(order.created_at).toLocaleString()}</td>
                             <td className="py-4 text-sm font-medium text-slate-600">{order.customer?.name || 'Walk-in'}</td>
                             <td className="py-4 text-sm font-medium text-slate-600">{order.user?.name || '-'}</td>
-                            <td className="py-4 text-sm font-bold text-slate-800">${parseFloat(order.total_amount).toFixed(2)}</td>
+                            <td className="py-4 text-sm font-bold text-slate-800">Rs {parseFloat(order.total_amount).toFixed(2)}</td>
                             <td className="py-4 text-sm">{getStatusBadge(order.status)}</td>
                             <td className="py-4 text-sm text-right">
                                 <button 

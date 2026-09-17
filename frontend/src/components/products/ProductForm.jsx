@@ -141,7 +141,7 @@ export default function ProductForm({ show, handleClose, productToEdit, onSaveSu
                                     value={formData.name}
                                     onChange={handleChange}
                                     required
-                                    className={`w-full px-4 py-3 rounded-xl border ${validationErrors.name ? 'border-red-500 focus:ring-red-500/20 focus:border-red-500' : 'border-slate-200 focus:ring-violet-500/20 focus:border-violet-500'} bg-white focus:ring-2 outline-none text-slate-700 text-sm font-medium transition-all`}
+                                    className={`w-full px-4 py-3 rounded-xl border Rs {validationErrors.name ? 'border-red-500 focus:ring-red-500/20 focus:border-red-500' : 'border-slate-200 focus:ring-violet-500/20 focus:border-violet-500'} bg-white focus:ring-2 outline-none text-slate-700 text-sm font-medium transition-all`}
                                 />
                                 {validationErrors.name && <p className="text-red-500 text-xs mt-1">{validationErrors.name}</p>}
                             </div>
@@ -157,7 +157,7 @@ export default function ProductForm({ show, handleClose, productToEdit, onSaveSu
                                     value={formData.sku}
                                     onChange={handleChange}
                                     required
-                                    className={`w-full px-4 py-3 rounded-xl border ${validationErrors.sku ? 'border-red-500 focus:ring-red-500/20 focus:border-red-500' : 'border-slate-200 focus:ring-violet-500/20 focus:border-violet-500'} bg-white focus:ring-2 outline-none text-slate-700 text-sm font-medium transition-all`}
+                                    className={`w-full px-4 py-3 rounded-xl border Rs {validationErrors.sku ? 'border-red-500 focus:ring-red-500/20 focus:border-red-500' : 'border-slate-200 focus:ring-violet-500/20 focus:border-violet-500'} bg-white focus:ring-2 outline-none text-slate-700 text-sm font-medium transition-all`}
                                 />
                                 {validationErrors.sku && <p className="text-red-500 text-xs mt-1">{validationErrors.sku}</p>}
                             </div>
@@ -175,7 +175,7 @@ export default function ProductForm({ show, handleClose, productToEdit, onSaveSu
                                     onChange={handleChange}
                                     required
                                     disabled={loadingCats}
-                                    className={`w-full px-4 py-3 rounded-xl border ${validationErrors.category_id ? 'border-red-500 focus:ring-red-500/20 focus:border-red-500' : 'border-slate-200 focus:ring-violet-500/20 focus:border-violet-500'} bg-white focus:ring-2 outline-none text-slate-700 text-sm font-medium transition-all disabled:opacity-75`}
+                                    className={`w-full px-4 py-3 rounded-xl border Rs {validationErrors.category_id ? 'border-red-500 focus:ring-red-500/20 focus:border-red-500' : 'border-slate-200 focus:ring-violet-500/20 focus:border-violet-500'} bg-white focus:ring-2 outline-none text-slate-700 text-sm font-medium transition-all disabled:opacity-75`}
                                 >
                                     <option value="">{loadingCats ? 'Loading...' : 'Select Category'}</option>
                                     {categories.map(c => (
@@ -198,7 +198,7 @@ export default function ProductForm({ show, handleClose, productToEdit, onSaveSu
                                     value={formData.price}
                                     onChange={handleChange}
                                     required
-                                    className={`w-full px-4 py-3 rounded-xl border ${validationErrors.price ? 'border-red-500 focus:ring-red-500/20 focus:border-red-500' : 'border-slate-200 focus:ring-violet-500/20 focus:border-violet-500'} bg-white focus:ring-2 outline-none text-slate-700 text-sm font-medium transition-all`}
+                                    className={`w-full px-4 py-3 rounded-xl border Rs {validationErrors.price ? 'border-red-500 focus:ring-red-500/20 focus:border-red-500' : 'border-slate-200 focus:ring-violet-500/20 focus:border-violet-500'} bg-white focus:ring-2 outline-none text-slate-700 text-sm font-medium transition-all`}
                                 />
                                 {validationErrors.price && <p className="text-red-500 text-xs mt-1">{validationErrors.price}</p>}
                             </div>
@@ -215,7 +215,7 @@ export default function ProductForm({ show, handleClose, productToEdit, onSaveSu
                                     value={formData.stock_quantity}
                                     onChange={handleChange}
                                     disabled={isEditMode}
-                                    className={`w-full px-4 py-3 rounded-xl border ${validationErrors.stock_quantity ? 'border-red-500 focus:ring-red-500/20 focus:border-red-500' : 'border-slate-200 focus:ring-violet-500/20 focus:border-violet-500'} bg-white focus:ring-2 outline-none text-slate-700 text-sm font-medium transition-all disabled:bg-slate-50 disabled:text-slate-500`}
+                                    className={`w-full px-4 py-3 rounded-xl border Rs {validationErrors.stock_quantity ? 'border-red-500 focus:ring-red-500/20 focus:border-red-500' : 'border-slate-200 focus:ring-violet-500/20 focus:border-violet-500'} bg-white focus:ring-2 outline-none text-slate-700 text-sm font-medium transition-all disabled:bg-slate-50 disabled:text-slate-500`}
                                 />
                                 {isEditMode && (
                                     <p className="text-slate-400 text-xs mt-1">Use Stock module to adjust.</p>
@@ -234,7 +234,7 @@ export default function ProductForm({ show, handleClose, productToEdit, onSaveSu
                                 name="description"
                                 value={formData.description}
                                 onChange={handleChange}
-                                className={`w-full px-4 py-3 rounded-xl border ${validationErrors.description ? 'border-red-500 focus:ring-red-500/20 focus:border-red-500' : 'border-slate-200 focus:ring-violet-500/20 focus:border-violet-500'} bg-white focus:ring-2 outline-none text-slate-700 text-sm font-medium transition-all`}
+                                className={`w-full px-4 py-3 rounded-xl border Rs {validationErrors.description ? 'border-red-500 focus:ring-red-500/20 focus:border-red-500' : 'border-slate-200 focus:ring-violet-500/20 focus:border-violet-500'} bg-white focus:ring-2 outline-none text-slate-700 text-sm font-medium transition-all`}
                             ></textarea>
                             {validationErrors.description && <p className="text-red-500 text-xs mt-1">{validationErrors.description}</p>}
                         </div>

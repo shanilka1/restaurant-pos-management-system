@@ -36,7 +36,7 @@ const ThermalReceiptModal = ({ show, onHide, order }) => {
                     </style>
                 </head>
                 <body>
-                    ${printContent}
+                    Rs {printContent}
                 </body>
             </html>
         `);
@@ -106,8 +106,8 @@ const ThermalReceiptModal = ({ show, onHide, order }) => {
                                         {item.notes && <div className="small text-muted fst-italic">Note: {item.notes}</div>}
                                     </td>
                                     <td className="text-center align-top">{item.quantity}</td>
-                                    <td className="text-end align-top">${parseFloat(item.unit_price).toFixed(2)}</td>
-                                    <td className="text-end align-top fw-bold">${parseFloat(item.subtotal).toFixed(2)}</td>
+                                    <td className="text-end align-top">Rs {parseFloat(item.unit_price).toFixed(2)}</td>
+                                    <td className="text-end align-top fw-bold">Rs {parseFloat(item.subtotal).toFixed(2)}</td>
                                 </tr>
                             ))}
                         </tbody>
@@ -116,44 +116,44 @@ const ThermalReceiptModal = ({ show, onHide, order }) => {
                     <div className="border-top border-dashed pt-2 small">
                         <div className="d-flex justify-content-between">
                             <span>Subtotal:</span>
-                            <span>${subtotal.toFixed(2)}</span>
+                            <span>Rs {subtotal.toFixed(2)}</span>
                         </div>
                         {discount > 0 && (
                             <div className="d-flex justify-content-between text-danger">
                                 <span>Discount:</span>
-                                <span>-${discount.toFixed(2)}</span>
+                                <span>-Rs ${discount.toFixed(2)}</span>
                             </div>
                         )}
                         {tax > 0 && (
                             <div className="d-flex justify-content-between text-muted">
                                 <span>Tax (VAT):</span>
-                                <span>+${tax.toFixed(2)}</span>
+                                <span>+Rs ${tax.toFixed(2)}</span>
                             </div>
                         )}
                         {service > 0 && (
                             <div className="d-flex justify-content-between text-muted">
                                 <span>Service Charge:</span>
-                                <span>+${service.toFixed(2)}</span>
+                                <span>+Rs ${service.toFixed(2)}</span>
                             </div>
                         )}
                         {tip > 0 && (
                             <div className="d-flex justify-content-between text-success">
                                 <span>Tip:</span>
-                                <span>+${tip.toFixed(2)}</span>
+                                <span>+Rs ${tip.toFixed(2)}</span>
                             </div>
                         )}
                         <div className="d-flex justify-content-between fw-bold fs-6 border-top border-dark pt-1 mt-1">
                             <span>TOTAL:</span>
-                            <span>${grandTotal.toFixed(2)}</span>
+                            <span>Rs {grandTotal.toFixed(2)}</span>
                         </div>
                         <div className="d-flex justify-content-between text-muted mt-1">
                             <span>Payment ({order.payment_method || 'Cash'}):</span>
-                            <span>${paid.toFixed(2)}</span>
+                            <span>Rs {paid.toFixed(2)}</span>
                         </div>
                         {change > 0 && (
                             <div className="d-flex justify-content-between fw-bold text-success">
                                 <span>Change Due:</span>
-                                <span>${change.toFixed(2)}</span>
+                                <span>Rs {change.toFixed(2)}</span>
                             </div>
                         )}
                     </div>

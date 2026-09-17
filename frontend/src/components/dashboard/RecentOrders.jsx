@@ -39,7 +39,7 @@ export default function RecentOrders({ orders }) {
                                 <td className="py-4 text-sm font-bold text-white">#{order.id}</td>
                                 <td className="py-4 text-sm text-slate-200 font-medium">{order.customer?.name || 'Walk-in'}</td>
                                 <td className="py-4">
-                                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold uppercase ${
+                                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold uppercase Rs {
                                         order.status === 'completed' ? 'bg-emerald-900/60 text-emerald-300 border border-emerald-500/40' :
                                         order.status === 'pending' ? 'bg-amber-900/60 text-amber-300 border border-amber-500/40' :
                                         'bg-red-900/60 text-red-300 border border-red-500/40'
@@ -47,7 +47,7 @@ export default function RecentOrders({ orders }) {
                                         {order.status}
                                     </span>
                                 </td>
-                                <td className="py-4 text-sm font-extrabold text-amber-300 text-right">${parseFloat(order.total_amount).toFixed(2)}</td>
+                                <td className="py-4 text-sm font-extrabold text-amber-300 text-right">Rs {parseFloat(order.total_amount).toFixed(2)}</td>
                             </tr>
                         ))}
                     </tbody>

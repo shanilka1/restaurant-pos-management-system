@@ -136,7 +136,7 @@ export default function Customers() {
                                     <button 
                                         disabled={pagination.current_page === 1}
                                         onClick={() => setCurrentPage(prev => prev - 1)} 
-                                        className={`px-3 py-1.5 rounded-xl font-bold transition-all text-sm ${pagination.current_page === 1 ? 'bg-slate-100 text-slate-400 cursor-not-allowed' : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 shadow-sm'}`}
+                                        className={`px-3 py-1.5 rounded-xl font-bold transition-all text-sm Rs {pagination.current_page === 1 ? 'bg-slate-100 text-slate-400 cursor-not-allowed' : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 shadow-sm'}`}
                                     >
                                         Prev
                                     </button>
@@ -146,7 +146,7 @@ export default function Customers() {
                                     <button 
                                         disabled={pagination.current_page === pagination.last_page}
                                         onClick={() => setCurrentPage(prev => prev + 1)}
-                                        className={`px-3 py-1.5 rounded-xl font-bold transition-all text-sm ${pagination.current_page === pagination.last_page ? 'bg-slate-100 text-slate-400 cursor-not-allowed' : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 shadow-sm'}`}
+                                        className={`px-3 py-1.5 rounded-xl font-bold transition-all text-sm Rs {pagination.current_page === pagination.last_page ? 'bg-slate-100 text-slate-400 cursor-not-allowed' : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 shadow-sm'}`}
                                     >
                                         Next
                                     </button>

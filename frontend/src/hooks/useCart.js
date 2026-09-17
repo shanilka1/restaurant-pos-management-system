@@ -14,6 +14,7 @@ export default function useCart() {
                 );
             }
             return [...prevCart, { 
+                id: product.id,
                 product_id: product.id, 
                 name: product.name, 
                 price: parseFloat(product.price),

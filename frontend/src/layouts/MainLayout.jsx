@@ -6,7 +6,7 @@ const NavItem = ({ to, icon, label, isActive, onClick }) => (
     <Link 
         to={to} 
         onClick={onClick}
-        className={`flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all font-semibold text-sm ${
+        className={`flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all font-semibold text-sm Rs {
             isActive 
             ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-extrabold shadow-lg shadow-amber-500/25' 
             : 'text-slate-300 hover:text-amber-400 hover:bg-slate-800/80'

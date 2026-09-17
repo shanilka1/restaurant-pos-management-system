@@ -160,15 +160,15 @@ export default function Home() {
                             </div>
                             <div className="flex justify-between text-slate-200">
                                 <span>2x Margherita Pizza</span>
-                                <span className="font-bold">$28.00</span>
+                                <span className="font-bold">Rs 28.00</span>
                             </div>
                             <div className="flex justify-between text-slate-200">
                                 <span>1x Fresh Mango Smoothie</span>
-                                <span className="font-bold">$5.50</span>
+                                <span className="font-bold">Rs 5.50</span>
                             </div>
                             <div className="border-t border-slate-800 pt-2 flex justify-between font-bold text-amber-300 text-sm">
                                 <span>Total Paid (Cash):</span>
-                                <span>$33.50</span>
+                                <span>Rs 33.50</span>
                             </div>
                         </div>
 

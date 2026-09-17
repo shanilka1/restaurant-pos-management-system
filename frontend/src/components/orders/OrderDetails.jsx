@@ -104,15 +104,15 @@ export default function OrderDetails({ show, handleClose, orderId, onUpdateSucce
                                                     <div className="text-xs text-slate-400 font-normal mt-0.5">{item.product?.sku}</div>
                                                 </td>
                                                 <td className="py-3 text-sm font-medium text-slate-600 text-center">{item.quantity}</td>
-                                                <td className="py-3 text-sm font-medium text-slate-600 text-right">${parseFloat(item.unit_price).toFixed(2)}</td>
-                                                <td className="py-3 text-sm font-bold text-slate-800 text-right">${parseFloat(item.subtotal).toFixed(2)}</td>
+                                                <td className="py-3 text-sm font-medium text-slate-600 text-right">Rs {parseFloat(item.unit_price).toFixed(2)}</td>
+                                                <td className="py-3 text-sm font-bold text-slate-800 text-right">Rs {parseFloat(item.subtotal).toFixed(2)}</td>
                                             </tr>
                                         ))}
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <td colSpan="3" className="py-4 text-right font-bold text-slate-600">Total:</td>
-                                            <td className="py-4 text-right font-bold text-slate-800 text-lg">${parseFloat(order.total_amount).toFixed(2)}</td>
+                                            <td className="py-4 text-right font-bold text-slate-800 text-lg">Rs {parseFloat(order.total_amount).toFixed(2)}</td>
                                         </tr>
                                     </tfoot>
                                 </table>

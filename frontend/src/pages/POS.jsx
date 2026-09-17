@@ -265,7 +265,7 @@ export default function POS() {
                                                 <small className="text-muted font-monospace">{p.sku}</small>
                                             </div>
                                             <div className="mt-2 border-top pt-1 d-flex justify-content-between align-items-center">
-                                                <span className="fw-bold text-primary fs-6">${parseFloat(p.price).toFixed(2)}</span>
+                                                <span className="fw-bold text-primary fs-6">Rs {parseFloat(p.price).toFixed(2)}</span>
                                                 <Badge bg={p.stock_quantity <= 5 ? 'danger' : 'secondary'} className="small">
                                                     Stock: {p.stock_quantity}
                                                 </Badge>
@@ -326,7 +326,7 @@ export default function POS() {
                                         <div key={item.id} className="d-flex justify-content-between align-items-center border-bottom py-2">
                                             <div className="pe-2">
                                                 <div className="fw-bold text-dark small">{item.name}</div>
-                                                <div className="text-muted small">${parseFloat(item.price).toFixed(2)} each</div>
+                                                <div className="text-muted small">Rs {parseFloat(item.price).toFixed(2)} each</div>
                                             </div>
                                             <div className="d-flex align-items-center gap-1">
                                                 <Button size="sm" variant="outline-secondary" className="px-2 py-0" onClick={() => updateQuantity(item.id, item.quantity - 1)}>-</Button>
@@ -343,7 +343,7 @@ export default function POS() {
                             <div className="border-top pt-2 small">
                                 <Row className="g-2 mb-2">
                                     <Col xs={6}>
-                                        <Form.Label className="mb-0 text-muted">Discount ($)</Form.Label>
+                                        <Form.Label className="mb-0 text-muted">Discount (Rs)</Form.Label>
                                         <Form.Control type="number" step="0.01" value={discountAmount} onChange={(e) => setDiscountAmount(e.target.value)} size="sm" />
                                     </Col>
                                     <Col xs={6}>
@@ -354,23 +354,23 @@ export default function POS() {
 
                                 <div className="d-flex justify-content-between mb-1">
                                     <span>Subtotal:</span>
-                                    <span className="fw-semibold">${subtotal.toFixed(2)}</span>
+                                    <span className="fw-semibold">Rs {subtotal.toFixed(2)}</span>
                                 </div>
                                 {discount > 0 && (
                                     <div className="d-flex justify-content-between mb-1 text-danger">
                                         <span>Discount:</span>
-                                        <span>-${discount.toFixed(2)}</span>
+                                        <span>-Rs {discount.toFixed(2)}</span>
                                     </div>
                                 )}
                                 {taxAmount > 0 && (
                                     <div className="d-flex justify-content-between mb-1 text-muted">
                                         <span>Tax ({taxPercent}%):</span>
-                                        <span>+${taxAmount.toFixed(2)}</span>
+                                        <span>+Rs {taxAmount.toFixed(2)}</span>
                                     </div>
                                 )}
                                 <div className="d-flex justify-content-between fs-5 fw-bold text-dark border-top border-dark pt-1 mb-3">
                                     <span>TOTAL:</span>
-                                    <span className="text-primary">${grandTotal.toFixed(2)}</span>
+                                    <span className="text-primary">Rs {grandTotal.toFixed(2)}</span>
                                 </div>
 
                                 {/* Payment Method & Tendered */}
@@ -394,7 +394,7 @@ export default function POS() {
                                 {paymentMethod === 'cash' && (
                                     <Row className="g-2 mb-3">
                                         <Col xs={6}>
-                                            <Form.Label className="mb-0 text-muted">Cash Tendered ($)</Form.Label>
+                                            <Form.Label className="mb-0 text-muted">Cash Tendered (Rs)</Form.Label>
                                             <Form.Control
                                                 type="number"
                                                 step="0.01"
@@ -406,9 +406,9 @@ export default function POS() {
                                             />
                                         </Col>
                                         <Col xs={6}>
-                                            <Form.Label className="mb-0 text-muted">Change Due ($)</Form.Label>
+                                            <Form.Label className="mb-0 text-muted">Change Due (Rs)</Form.Label>
                                             <div className="form-control form-control-sm bg-light fw-bold text-success">
-                                                ${changeDue.toFixed(2)}
+                                                Rs {changeDue.toFixed(2)}
                                             </div>
                                         </Col>
                                     </Row>
@@ -425,7 +425,7 @@ export default function POS() {
                                     onClick={handleCheckout}
                                     disabled={cart.length === 0 || isSubmitting}
                                 >
-                                    {isSubmitting ? 'Processing Order...' : `💳 Complete Checkout ($${grandTotal.toFixed(2)})`}
+                                    {isSubmitting ? 'Processing Order...' : `💳 Complete Checkout (Rs {grandTotal.toFixed(2)})`}
                                 </Button>
 
                                 <Button

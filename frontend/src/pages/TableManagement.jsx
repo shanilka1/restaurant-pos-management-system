@@ -123,8 +123,8 @@ const TableManagement = () => {
                 <Row className="g-3">
                     {filteredTables.map((t) => (
                         <Col key={t.id} xs={12} sm={6} md={4} lg={3}>
-                            <Card className={`h-100 shadow-sm border-2 border-${getStatusColor(t.status)}`}>
-                                <Card.Header className={`bg-${getStatusColor(t.status)} text-white d-flex justify-content-between align-items-center py-2`}>
+                            <Card className={`h-100 shadow-sm border-2 border-Rs ${getStatusColor(t.status)}`}>
+                                <Card.Header className={`bg-Rs ${getStatusColor(t.status)} text-white d-flex justify-content-between align-items-center py-2`}>
                                     <span className="fw-bold fs-5">{t.table_number}</span>
                                     <Badge bg="light" text="dark" className="text-uppercase small">{t.section}</Badge>
                                 </Card.Header>
@@ -141,7 +141,7 @@ const TableManagement = () => {
                                         {t.current_order && (
                                             <div className="bg-white p-2 rounded border mt-2 small">
                                                 <div className="fw-bold text-primary">Active Bill #{t.current_order.id}</div>
-                                                <div className="text-dark font-monospace">${parseFloat(t.current_order.total_amount).toFixed(2)}</div>
+                                                <div className="text-dark font-monospace">Rs {parseFloat(t.current_order.total_amount).toFixed(2)}</div>
                                                 <div className="text-muted small">{t.current_order.order_items?.length || 0} Items</div>
                                             </div>
                                         )}

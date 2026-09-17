@@ -13,7 +13,7 @@ export default function CartItem({ item, updateQuantity, onRemove }) {
         <div className="d-flex justify-content-between align-items-center mb-3 p-2 border-bottom">
             <div className="flex-grow-1">
                 <div className="fw-bold">{item.name}</div>
-                <div className="text-muted small">${item.price.toFixed(2)} each</div>
+                <div className="text-muted small">Rs {item.price.toFixed(2)} each</div>
             </div>
             
             <div className="d-flex align-items-center" style={{ width: '130px' }}>
@@ -40,7 +40,7 @@ export default function CartItem({ item, updateQuantity, onRemove }) {
             </div>
 
             <div className="text-end ms-3" style={{ width: '70px' }}>
-                <div className="fw-bold">${(item.price * item.quantity).toFixed(2)}</div>
+                <div className="fw-bold">Rs {(item.price * item.quantity).toFixed(2)}</div>
                 <Button 
                     variant="link" 
                     className="text-danger p-0 text-decoration-none small"

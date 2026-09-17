@@ -73,7 +73,7 @@ export default function Cart({
                     </div>
                     <div className="flex justify-between items-center mb-5">
                         <span className="text-lg font-bold text-slate-800">Total (Est):</span>
-                        <span className="text-xl font-bold text-emerald-600">${cartTotalAmount.toFixed(2)}</span>
+                        <span className="text-xl font-bold text-emerald-600">Rs {cartTotalAmount.toFixed(2)}</span>
                     </div>
 
                     <div className="w-full">

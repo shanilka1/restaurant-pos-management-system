@@ -36,12 +36,12 @@ export default function Login() {
                 } else if (err.response.status === 401) {
                     setError('Invalid credentials.');
                 } else {
-                    setError(err.response.data?.message || `Server error: ${err.response.status}`);
+                    setError(err.response.data?.message || `Server error: Rs {err.response.status}`);
                 }
             } else if (err.request) {
                 setError('Network error: Could not reach the server. Please check your connection.');
             } else {
-                setError(`An error occurred: ${err.message}`);
+                setError(`An error occurred: Rs {err.message}`);
             }
         } finally {
             setLoading(false);

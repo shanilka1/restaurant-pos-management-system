@@ -24,7 +24,7 @@ export default function SalesChart({ data }) {
                             <XAxis dataKey="date" tick={{fontSize: 12}} />
                             <YAxis tick={{fontSize: 12}} />
                             <Tooltip 
-                                formatter={(value) => [`$${parseFloat(value).toFixed(2)}`, 'Sales']}
+                                formatter={(value) => [`Rs {parseFloat(value).toFixed(2)}`, 'Sales']}
                                 labelStyle={{ color: '#333', fontWeight: 'bold' }}
                             />
                             <Legend />

@@ -55,12 +55,12 @@ export default function Dashboard() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <StatCard 
                     title="Today's Sales" 
-                    value={`$${stats.today_sales.toFixed(2)}`} 
+                    value={`Rs {stats.today_sales.toFixed(2)}`} 
                     variant="primary" 
                 />
                 <StatCard 
                     title="Total Sales" 
-                    value={`$${stats.total_sales.toFixed(2)}`} 
+                    value={`Rs {stats.total_sales.toFixed(2)}`} 
                     variant="success" 
                 />
                 <StatCard 

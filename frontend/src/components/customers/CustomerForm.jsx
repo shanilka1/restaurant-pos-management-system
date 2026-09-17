@@ -101,7 +101,7 @@ export default function CustomerForm({ show, handleClose, customerToEdit, onSave
                                 value={formData.name}
                                 onChange={handleChange}
                                 required
-                                className={`w-full px-4 py-3 rounded-xl border ${validationErrors.name ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-violet-500 focus:ring-violet-500/20'} bg-white focus:ring-2 outline-none text-slate-700 text-sm font-medium transition-all`}
+                                className={`w-full px-4 py-3 rounded-xl border Rs {validationErrors.name ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-violet-500 focus:ring-violet-500/20'} bg-white focus:ring-2 outline-none text-slate-700 text-sm font-medium transition-all`}
                             />
                             {validationErrors.name && <p className="text-red-500 text-xs mt-1 font-medium">{validationErrors.name}</p>}
                         </div>
@@ -116,7 +116,7 @@ export default function CustomerForm({ show, handleClose, customerToEdit, onSave
                                 value={formData.phone}
                                 onChange={handleChange}
                                 required
-                                className={`w-full px-4 py-3 rounded-xl border ${validationErrors.phone ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-violet-500 focus:ring-violet-500/20'} bg-white focus:ring-2 outline-none text-slate-700 text-sm font-medium transition-all`}
+                                className={`w-full px-4 py-3 rounded-xl border Rs {validationErrors.phone ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-violet-500 focus:ring-violet-500/20'} bg-white focus:ring-2 outline-none text-slate-700 text-sm font-medium transition-all`}
                             />
                             {validationErrors.phone && <p className="text-red-500 text-xs mt-1 font-medium">{validationErrors.phone}</p>}
                         </div>
@@ -130,7 +130,7 @@ export default function CustomerForm({ show, handleClose, customerToEdit, onSave
                                 placeholder="e.g. john@example.com"
                                 value={formData.email}
                                 onChange={handleChange}
-                                className={`w-full px-4 py-3 rounded-xl border ${validationErrors.email ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-violet-500 focus:ring-violet-500/20'} bg-white focus:ring-2 outline-none text-slate-700 text-sm font-medium transition-all`}
+                                className={`w-full px-4 py-3 rounded-xl border Rs {validationErrors.email ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-violet-500 focus:ring-violet-500/20'} bg-white focus:ring-2 outline-none text-slate-700 text-sm font-medium transition-all`}
                             />
                             {validationErrors.email && <p className="text-red-500 text-xs mt-1 font-medium">{validationErrors.email}</p>}
                         </div>
@@ -144,7 +144,7 @@ export default function CustomerForm({ show, handleClose, customerToEdit, onSave
                                 placeholder="e.g. 123 Main St, City, Country"
                                 value={formData.address}
                                 onChange={handleChange}
-                                className={`w-full px-4 py-3 rounded-xl border ${validationErrors.address ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-violet-500 focus:ring-violet-500/20'} bg-white focus:ring-2 outline-none text-slate-700 text-sm font-medium transition-all resize-none`}
+                                className={`w-full px-4 py-3 rounded-xl border Rs {validationErrors.address ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-violet-500 focus:ring-violet-500/20'} bg-white focus:ring-2 outline-none text-slate-700 text-sm font-medium transition-all resize-none`}
                             />
                             {validationErrors.address && <p className="text-red-500 text-xs mt-1 font-medium">{validationErrors.address}</p>}
                         </div>

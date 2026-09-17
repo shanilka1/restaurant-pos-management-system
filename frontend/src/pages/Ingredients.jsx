@@ -87,7 +87,7 @@ const Ingredients = () => {
         try {
             const valid = recipeItems.filter(r => r.ingredient_id && r.quantity_required > 0);
             await ingredientService.saveRecipes(selectedProduct.id, valid);
-            setSuccess(`Recipe saved for ${selectedProduct.name}`);
+            setSuccess(`Recipe saved for Rs {selectedProduct.name}`);
             setShowRecipeModal(false);
         } catch (err) {
             setError(err.response?.data?.message || 'Failed to save recipe');
@@ -139,7 +139,7 @@ const Ingredients = () => {
                                                         {parseFloat(ing.current_stock).toFixed(2)} {ing.unit}
                                                     </td>
                                                     <td>{parseFloat(ing.min_stock_alert).toFixed(2)} {ing.unit}</td>
-                                                    <td>${parseFloat(ing.unit_cost).toFixed(2)}</td>
+                                                    <td>Rs {parseFloat(ing.unit_cost).toFixed(2)}</td>
                                                     <td>
                                                         {isLow ? (
                                                             <Badge bg="danger">⚠️ LOW STOCK</Badge>
@@ -175,7 +175,7 @@ const Ingredients = () => {
                                     {products.map((p) => (
                                         <tr key={p.id}>
                                             <td className="fw-bold">{p.name}</td>
-                                            <td>${parseFloat(p.price).toFixed(2)}</td>
+                                            <td>Rs {parseFloat(p.price).toFixed(2)}</td>
                                             <td className="text-end">
                                                 <Button size="sm" variant="outline-primary" onClick={() => handleOpenRecipeModal(p)}>
                                                     ⚙️ Manage Recipe
@@ -228,7 +228,7 @@ const Ingredients = () => {
                             </Col>
                             <Col md={6}>
                                 <Form.Group className="mb-3">
-                                    <Form.Label className="fw-bold">Unit Cost ($)</Form.Label>
+                                    <Form.Label className="fw-bold">Unit Cost (Rs)</Form.Label>
                                     <Form.Control type="number" step="0.01" value={unitCost} onChange={e => setUnitCost(e.target.value)} required />
                                 </Form.Group>
                             </Col>
